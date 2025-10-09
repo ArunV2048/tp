@@ -15,6 +15,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Age;
+import seedu.address.model.person.Gender;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +30,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String age;
+    private final String gender;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +39,16 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("age") String age,
+                             @JsonProperty("gender") String gender) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.age = age;
+        this.gender = gender;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +62,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        age = source.getAge() == null ? null : source.getAge().toString();
+        gender = source.getGender() == null ? null : source.getGender().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,6 +80,7 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+        // Validate and construct Name
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -78,6 +89,7 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
+        // Validate and construct Phone
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -86,6 +98,7 @@ class JsonAdaptedPerson {
         }
         final Phone modelPhone = new Phone(phone);
 
+        // Validate and construct Email
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -94,6 +107,7 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        // Validate and construct Address
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -102,8 +116,29 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
+        // Validate and construct Age (optional, but must be valid if present)
+        final Age modelAge;
+        if (age != null) {
+            if (!Age.isValidAge(age)) {
+                throw new IllegalValueException(Age.MESSAGE_CONSTRAINTS);
+            }
+            modelAge = new Age(Integer.parseInt(age));
+        } else {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
+        }
 
+        // Validate and construct Gender (optional, but must be valid if present)
+        final Gender modelGender;
+        if (gender != null) {
+            if (!Gender.isValidGender(gender)) {
+                throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+            }
+            modelGender = new Gender(gender);
+        } else {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelAge, modelGender, modelTags);
+    }
 }

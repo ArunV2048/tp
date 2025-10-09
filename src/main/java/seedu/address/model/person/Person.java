@@ -20,6 +20,10 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Age age;
+    private final Gender gender;
+
+
 
     // Data fields
     private final Address address;
@@ -28,12 +32,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Age age, Gender gender, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, age, gender, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.age = age;
+        this.gender = gender;
         this.tags.addAll(tags);
     }
 
@@ -52,6 +58,15 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public Age getAge() {
+        return age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -80,27 +95,21 @@ public class Person {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof Person)) {
-            return false;
-        }
-
+        if (other == this) return true;
+        if (!(other instanceof Person)) return false;
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && age.equals(otherPerson.age)
+                && gender.equals(otherPerson.gender)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, age, gender, tags);
     }
 
     @Override
@@ -110,6 +119,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("age", age)
+                .add("gender", gender)
                 .add("tags", tags)
                 .toString();
     }

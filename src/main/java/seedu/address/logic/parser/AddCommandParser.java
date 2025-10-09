@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE; // You must add these prefixes in CliSyntax.java
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -13,11 +16,14 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -43,9 +49,21 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Age age = null;
+        Gender gender = null;
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
+            age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
+        }
+        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+        }
+
+
+        Person person = new Person(name, phone, email, address, age, gender, tagList);
+
 
         return new AddCommand(person);
     }
