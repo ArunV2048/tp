@@ -28,6 +28,7 @@ class JsonAdaptedPerson {
     private final String goal;
     private final String height;
     private final String paid; // New field for payment status
+    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -42,6 +43,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("height") String height,
                              @JsonProperty("deadline") String deadline,
                              @JsonProperty("paid") String paid,
+                             @JsonProperty("remark") String remark,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -51,6 +53,7 @@ class JsonAdaptedPerson {
         this.goal = goal;
         this.height = height;
         this.paid = paid;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -68,6 +71,7 @@ class JsonAdaptedPerson {
         goal = source.getGoal().value;
         height = String.valueOf(source.getHeight().value); // convert int → String
         paid = source.getPaymentStatus().toString(); // Convert Paid to String
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -145,10 +149,14 @@ class JsonAdaptedPerson {
         }
         final Paid modelPaid = new Paid(paid); // Convert string to Paid
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGoal, modelHeight, modelDeadline, modelPaid, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelGoal, modelHeight, modelDeadline, modelPaid, modelRemark, modelTags);
     }
 
 }

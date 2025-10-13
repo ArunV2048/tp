@@ -31,12 +31,13 @@ public class Person {
 
     private final Set<Tag> tags = new HashSet<>();
     private Paid paid;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Goal goal, Height height, Deadline deadline, Paid paid, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, goal, height, paid, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Goal goal, Height height, Deadline deadline, Paid paid, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, goal, height, paid, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +45,7 @@ public class Person {
         this.deadline = deadline;
         this.goal = goal;
         this.height = height;
+        this.remark = remark;
         this.tags.addAll(tags);
         this.paid = paid;
     }
@@ -69,13 +71,17 @@ public class Person {
     public Goal getGoal() {
         return goal;
     }
-      
+
     public Height getHeight() {
         return height;
     }
 
     public Paid getPaymentStatus() {
         return paid;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
@@ -122,13 +128,14 @@ public class Person {
                 && deadline.equals(otherPerson.deadline)
                 && goal.equals(otherPerson.goal)
                 && height.equals(otherPerson.height)
+                && remark.equals(otherPerson.remark)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, goal, height, deadline, paid, tags);
+        return Objects.hash(name, phone, email, address, goal, height, deadline, paid, remark, tags);
     }
 
     @Override
@@ -142,6 +149,7 @@ public class Person {
                 .add("goal", goal)
                 .add("height", height)
                 .add("paid", paid)
+                .add("remark", remark)
                 .add("tags", tags)
                 .toString();
     }

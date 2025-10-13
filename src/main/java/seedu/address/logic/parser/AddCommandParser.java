@@ -44,7 +44,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT).get());
 
 
-        Person person = new Person(name, phone, email, address, goal, height, deadline, paid, tagList);
+        Remark remark = new Remark(""); // Default empty remark
+        Person person = new Person(name, phone, email, address, goal, height, deadline, paid, remark, tagList);
 
         return new AddCommand(person);
     }
