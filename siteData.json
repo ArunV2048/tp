@@ -7,11 +7,11 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "john-doe": "John Doe",
-        "jane-doe": "Jane Doe",
-        "johnny-doe": "Johnny Doe",
-        "jean-doe": "Jean Doe",
-        "james-doe": "James Doe"
+        "eldridge-ng": "Eldridge Ng",
+        "harun-abdullah-bin-mohd-jufri": "Harun Abdullah Bin Mohd Jufri",
+        "arun-ayyappan-vellaiyan": "Arun Ayyappan Vellaiyan",
+        "adib": "Adib",
+        "darius-deng-yang": "Darius Deng Yang"
       },
       "headingKeywords": {}
     },
@@ -51,6 +51,7 @@
         "storage-component": "Storage component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
+        "sort-by-paid-status-feature": "Sort by Paid Status feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
@@ -61,7 +62,7 @@
         "non-functional-requirements": "Non-Functional Requirements",
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
-        "launch-and-shutdown": "Launch and shutdown",
+        "launch-aqnd-shutdown": "Launch aqnd shutdown",
         "deleting-a-person": "Deleting a person",
         "saving-data": "Saving data"
       },
@@ -107,23 +108,65 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "ab-3-user-guide": "AB-3 User Guide",
+        "fitbook-user-guide": "FitBook User Guide",
+        "welcome-trainers": "Welcome Trainers!",
+        "quick-start": "Quick Start",
+        "ui-guide": "UI Guide",
+        "command-reference": "Command Reference",
+        "add-add-a-client": "add — Add a client",
+        "edit-edit-a-client": "edit — Edit a client",
+        "list-view-all-clients": "list — View all clients",
+        "find-search-clients-by-name": "find — Search clients by name",
+        "delete-remove-a-client": "delete — Remove a client",
+        "clear-delete-all-clients": "clear — Delete all clients",
+        "sortbypaid-sort-clients-by-payment-status": "sortbypaid — Sort clients by payment status",
+        "sortbydeadline-sort-clients-by-payment-deadline": "sortbydeadline — Sort clients by payment deadline",
+        "sortbysession-sort-clients-by-upcoming-session": "sortbysession — Sort clients by upcoming session",
+        "session-update-a-client-s-scheduled-session": "session — Update a client’s scheduled session",
+        "goal-set-or-clear-a-fitness-goal": "goal — Set or clear a fitness goal",
+        "deadline-update-a-goal-deadline": "deadline — Update a goal deadline",
+        "paid-record-payment-status": "paid — Record payment status",
+        "height-weight-age-bodyfat-gender-update-individual-attributes": "height, weight, age, bodyfat, gender — Update individual attributes",
+        "client-switch-to-client-list-view": "client — Switch to client list view",
+        "dashboard-switch-to-dashboard-view": "dashboard — Switch to dashboard view",
+        "help-open-help-window": "help — Open help window",
+        "exit-close-the-program": "exit — Close the program",
+        "data-handling": "Data Handling",
+        "saving-data": "Saving data",
+        "data-file-location": "Data file location",
+        "editing-data-manually": "Editing data manually",
+        "faq": "FAQ",
+        "known-issues": "Known Issues",
+        "appendix-session-formatting-guide": "Appendix: Session Formatting Guide"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "UserGuide_backup.md",
+      "title": "User Guide",
+      "headings": {
+        "fitbook-user-guide": "FitBook User Guide",
         "quick-start": "Quick start",
+        "command-summary": "Command summary",
         "features": "Features",
-        "viewing-help-help": "Viewing help : help",
+        "help-window-help": "Help window : help",
         "adding-a-person-add": "Adding a person: add",
         "listing-all-persons-list": "Listing all persons : list",
         "editing-a-person-edit": "Editing a person : edit",
-        "locating-persons-by-name-find": "Locating persons by name: find",
+        "locating-persons-by-name-find": "Locating persons by name : find",
         "deleting-a-person-delete": "Deleting a person : delete",
+        "switching-to-the-client-list-client": "Switching to the client list : client",
+        "switching-to-the-dashboard-dashboard": "Switching to the dashboard : dashboard",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
+        "sorting-persons-by-paid-status-sortbypaid": "Sorting persons by paid status : sortbypaid",
+        "sorting-persons-by-payment-deadline-sortbydeadline": "Sorting persons by payment deadline : sortbydeadline",
         "saving-the-data": "Saving the data",
         "editing-the-data-file": "Editing the data file",
         "archiving-data-files-coming-in-v2-0": "Archiving data files [coming in v2.0]",
         "faq": "FAQ",
         "known-issues": "Known issues",
-        "command-summary": "Command summary"
+        "session-formatting-guide": "Session Formatting Guide:"
       },
       "headingKeywords": {}
     },
@@ -131,7 +174,7 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "addressbook-level-3": "AddressBook Level-3"
+        "fitbook": "FitBook"
       },
       "headingKeywords": {}
     },
